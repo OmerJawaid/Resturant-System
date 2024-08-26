@@ -1,0 +1,81 @@
+.Header{
+   
+    top:0px;
+}
+.Body{
+    display: flex;
+    align-items:center;
+}
+.BodyContent{
+    max-width: 557px;
+    height: 539.49px;
+    align-content: center;
+    gap:90px;
+    margin-left: 140px;
+    margin-right: 140px;
+}
+.Content{
+    max-height:353px;
+    
+}
+.Content>h1{
+    margin-bottom: 20px;
+}
+.Content p:first-child{
+    margin-bottom: 20px;
+}
+
+.LoginFrame{
+    width:35vw;
+    max-width:578px;
+    max-height: 649px;
+    background-color: white;
+    border-radius: 25px;
+    border:1px solid black;
+}
+.LoginForm{
+    margin-left:83.33px;
+    margin-top:  84px;
+    margin-right:83px;
+    margin-bottom: 57.21px;
+}
+
+.LoginForm p{
+color:#989898
+}
+.LoginForm p b{
+    color:black;
+}
+
+.LoginForm h4{
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.LoginInputs{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    margin: 0 auto;
+}
+.LoginInputs input{
+    border:1px solid grey;
+    border-radius: 20px;
+    padding:3px;
+    padding-left: 10px;
+    padding-right:10px;;
+    max-width: 100%;
+    background-color: #e0e4e4;
+    margin-bottom: 4vh;
+}
+
+.LoginInputs label{
+    color:#989898;
+    margin-left: 15px;
+}
+
+.LoginForm button{
+width: 100%;
+
+}
