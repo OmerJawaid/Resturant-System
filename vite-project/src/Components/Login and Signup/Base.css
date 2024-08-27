@@ -1,5 +1,9 @@
+#root{
+    width:100vw;
+    height: 100vh;
+}
+
 .Header{
-   
     top:0px;
 }
 .Body{
@@ -25,41 +29,42 @@
     margin-bottom: 20px;
 }
 
-.LoginFrame{
+.Frame{
+    
     width:35vw;
     max-width:578px;
-    max-height: 649px;
+    max-height: 600px;
     background-color: white;
     border-radius: 25px;
     border:1px solid black;
 }
-.LoginForm{
-    margin-left:83.33px;
-    margin-top:  84px;
-    margin-right:83px;
-    margin-bottom: 57.21px;
+.Form {
+    margin-left:70px;
+    margin-top:  55px;
+    margin-right:70px;
+    margin-bottom: 55px;
 }
 
-.LoginForm p{
+.Form p{
 color:#989898
 }
-.LoginForm p b{
+.Form p b{
     color:black;
 }
 
-.LoginForm h4{
-    font-size: 26px;
+.Form h4{
+    font-size: 32px;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-.LoginInputs{
+.Inputs{
     display: flex;
     flex-direction: column;
     width:100%;
     margin: 0 auto;
 }
-.LoginInputs input{
+.Inputs input{
     border:1px solid grey;
     border-radius: 20px;
     padding:3px;
@@ -70,12 +75,37 @@ color:#989898
     margin-bottom: 4vh;
 }
 
-.LoginInputs label{
+.Inputs label{
     color:#989898;
     margin-left: 15px;
 }
 
-.LoginForm button{
+.Form button{
 width: 100%;
 
+}
+
+
+.FirstLast{
+    display: grid;
+    width:100%;
+    margin: 0 auto;
+}
+.FirstLast input{
+    border:1px solid grey;
+    border-radius: 20px;
+    padding:3px;
+    padding-left: 10px;
+    padding-right:10px;;
+    max-width: 70%;
+    background-color: #e0e4e4;
+    margin-bottom: 4vh;
+}
+.FirstLast label{
+    color:#989898;
+    margin-left: 15px;
+}
+
+.FirstLastHead{
+    display: flex;
 }

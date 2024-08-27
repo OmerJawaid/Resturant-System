@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Base from "./Base";
+import "./Base.css";
 import Navbar from "./Navbar";
 
 const Signup = () => {
@@ -48,52 +49,70 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "#f9f9f7", width: "100vw", height: "100vh" }}
+    >
       <Navbar />
-      <div>
+      <div className="Body">
         <Base />
-        <form>
-          <h4>SingUp</h4>
-          <div>
+        <form className="Frame">
+          <div className="Form">
+            <h4>SignUp</h4>
             <div>
-              <label>First</label>
-              <input
-                value={FirstName}
-                name="FirstName"
-                onChange={HandleChange}
-              ></input>
+              <div className="FirstLastHead">
+                <div className="FirstLast">
+                  <label>First</label>
+                  <input
+                    value={FirstName}
+                    name="FirstName"
+                    onChange={HandleChange}
+                  ></input>
+                </div>
+                <div className="FirstLast">
+                  <label>Last</label>
+                  <input
+                    value={LastName}
+                    name="LastName"
+                    onChange={HandleChange}
+                  ></input>
+                </div>
+              </div>
+              <div className="Inputs">
+                <label>Email</label>
+                <input
+                  value={Email}
+                  name="Email"
+                  onChange={HandleChange}
+                  type="email"
+                ></input>
+                <div className="FirstLastHead">
+                  <div className="FirstLast">
+                    <label>Phone</label>
+                    <input
+                      value={Phone}
+                      name="Phone"
+                      onChange={HandleChange}
+                    ></input>
+                  </div>
+                  <div className="FirstLast">
+                    <label>Username</label>
+                    <input
+                      value={Username}
+                      name="Username"
+                      onChange={HandleChange}
+                    ></input>
+                  </div>
+                </div>
+                <label>Password</label>
+                <input
+                  value={Password}
+                  name="Password"
+                  onChange={HandleChange}
+                ></input>
+              </div>
             </div>
-            <div>
-              <label>Last</label>
-              <input
-                value={LastName}
-                name="LastName"
-                onChange={HandleChange}
-              ></input>
-            </div>
-            <label>Email</label>
-            <input
-              value={Email}
-              name="Email"
-              onChange={HandleChange}
-              type="email"
-            ></input>
-            <label>Phone</label>
-            <input value={Phone} name="Phone" onChange={HandleChange}></input>
-            <label>Username</label>
-            <input
-              value={Username}
-              name="Username"
-              onChange={HandleChange}
-            ></input>
-            <label>Password</label>
-            <input
-              value={Password}
-              name="Password"
-              onChange={HandleChange}
-            ></input>
+            <button onClick={SubmitSignUp}>Add</button>
           </div>
-          <button onClick={SubmitSignUp}>Add</button>
         </form>
       </div>
     </div>

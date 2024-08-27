@@ -7,26 +7,43 @@ import Navbar from "./Navbar.jsx";
 const Login = () => {
   const [Email, changeEmail] = useState("");
   const [Password, changepassword] = useState("");
-  const [Authenticate, changeAuthenticate] = useState(true);
-  const navigate = useNavigate();
+  const [Authenticate, changeAuthenticate] = useState(null);
+  const [Loading, setLoading] = useState(true);
+
   useEffect(() => {
     const authenticationCheck = async () => {
       try {
-        const responce = await axios.get("http://localhost:8081/athentication");
-        changeAuthenticate(responce.data.Authenticate);
+        const res = await axios.get("http://localhost:8081/authentication", {
+          withCredentials: true,
+        });
+
+        console.log("Authentication response:", res.data);
+        if (typeof res.data.Authenticate === "boolean") {
+          changeAuthenticate(res.data.Authenticate);
+        } else {
+          console.error("Unexpected response data:", res.data);
+          changeAuthenticate(false);
+        }
       } catch (err) {
         console.log(err);
         changeAuthenticate(false);
+      } finally {
+        setLoading(false);
       }
     };
     authenticationCheck();
   }, []);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    if (Authenticate == false) {
+    if (Loading) return;
+
+    console.log("Authenticate state:", Authenticate);
+    if (Authenticate === false) {
       navigate("/");
-    } else navigate("/Home");
-  }, [Authenticate, navigate]);
+    } else if (Authenticate === true) {
+      navigate("/Home");
+    } else navigate("/Signup");
+  }, [Authenticate, Loading, navigate]);
 
   const EmailInputHandler = (e) => {
     changeEmail(e.target.value);
@@ -40,10 +57,16 @@ const Login = () => {
   const LoginCheck = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8081/login", {
-        Email,
-        Password,
-      });
+      const response = await axios.post(
+        "http://localhost:8081/login",
+        {
+          Email,
+          Password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       if (response.data && response.data.message === "Login successful") {
         alert("Login Successful");
         navigate("/Home");
@@ -56,14 +79,16 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{ backgroundColor: "#f9f9f7", width: "100vw", height: "100vh" }}
+    >
       <Navbar />
       <div className="Body">
         <Base />
-        <form className="LoginFrame">
-          <div className="LoginForm">
+        <form className="Frame">
+          <div className="Form">
             <h4>Login / SignIn</h4>
-            <div className="LoginInputs">
+            <div className="Inputs">
               <label>Email</label>
               <input
                 placeholder="Enter your Email"
