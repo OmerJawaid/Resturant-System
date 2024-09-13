@@ -1,0 +1,44 @@
+.card{
+width: 303px;
+height:auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-items: center;
+padding: 20px;
+
+}
+
+.cardimage{
+    background-color:#DBDFD0;
+    border-radius: 50%;
+    padding: 20px;
+}
+.cardcontent{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.cardcontent>h4{
+    font-size: 20px;
+    margin-bottom: 10px;
+font-weight: bold;
+}
+.cardcontent>p{
+    flex-wrap: wrap;
+    font-size: 14px;
+    display: flex;
+}
+
+.explorebuttom{
+    font-size: 16px;
+    color:#AD343E;
+}
+
+.explorebuttom:hover{
+    color :#bb303b
+}

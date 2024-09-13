@@ -1,0 +1,34 @@
+.Headerbar{
+    display: flex;
+    background-color: #474747;
+    color:white;
+    padding:  1vh 5vw;
+}
+.Phone ,.Email{
+    display: flex;
+    align-items: center; 
+    font:16px
+}
+.PhoneLabel{
+    font-size:16px;
+    padding-left: 0.5vw;
+}
+.Email{
+    padding-left: 5vw;
+}
+.EmailLabel{
+    padding-left: 0.5vw;
+}
+
+.SocialLinks{
+    display: flex;
+    align-items: center;
+    margin-left: 50vw;
+    gap: 2vw;
+}
+
+.socialimg{
+    width: 14px;
+    height: 14px;
+    
+}

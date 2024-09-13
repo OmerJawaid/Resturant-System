@@ -7,9 +7,9 @@ import Navbar from "./Navbar.jsx";
 const Login = () => {
   const [Email, changeEmail] = useState("");
   const [Password, changepassword] = useState("");
-  const [Authenticate, changeAuthenticate] = useState(null);
+  const [Authenticate, changeAuthenticate] = useState(false);
   const [Loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const authenticationCheck = async () => {
       try {
@@ -17,7 +17,6 @@ const Login = () => {
           withCredentials: true,
         });
 
-        console.log("Authentication response:", res.data);
         if (typeof res.data.Authenticate === "boolean") {
           changeAuthenticate(res.data.Authenticate);
         } else {
@@ -33,16 +32,16 @@ const Login = () => {
     };
     authenticationCheck();
   }, []);
-  const navigate = useNavigate();
+
+  // Handle navigation based on authentication status
   useEffect(() => {
     if (Loading) return;
 
     console.log("Authenticate state:", Authenticate);
-    if (Authenticate === false) {
-      navigate("/");
-    } else if (Authenticate === true) {
-      navigate("/Home");
-    } else navigate("/Signup");
+    if (Authenticate === true) {
+      navigate("/"); // Redirect to Home if authenticated
+    }
+    // No need to navigate to /Login as you're already on it
   }, [Authenticate, Loading, navigate]);
 
   const EmailInputHandler = (e) => {
@@ -69,7 +68,7 @@ const Login = () => {
       );
       if (response.data && response.data.message === "Login successful") {
         alert("Login Successful");
-        navigate("/Home");
+        navigate("/");
       } else {
         alert("Login Failed: " + response.data.message);
       }
@@ -100,6 +99,7 @@ const Login = () => {
                 placeholder="Enter your Password"
                 value={Password}
                 onChange={PasswordInputHandler}
+                type="Password"
               ></input>
             </div>
             <button className="LoginButtonLoginFrame" onClick={LoginCheck}>

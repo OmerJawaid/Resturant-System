@@ -1,7 +1,24 @@
+import axios from "axios";
 import React from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Customer Header.css";
+import NavButton from "./NavButton";
 
 const CustomerHeader = () => {
+  const navigate = useNavigate;
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        "http://localhost:8081/destroy",
+        {},
+        { withCredentials: true }
+      );
+      navigate("/login");
+    } catch (error) {
+      console.error("Error:", error.response?.data?.message || error.message);
+    }
+  };
+
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -12,11 +29,14 @@ const CustomerHeader = () => {
           <img
             src="https://i.postimg.cc/Wz9QggM8/japanese-food.png"
             className="h-8"
-            alt="Flowbite Logo"
+            alt="Resturant"
             height={56}
             width={35}
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <span
+            id="LogoName"
+            className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white"
+          >
             Resturant
           </span>
         </a>
@@ -47,49 +67,30 @@ const CustomerHeader = () => {
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                aria-current="page"
-              >
-                Home
-              </a>
+              <NavButton to="/" label="Home" />
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                Menu
-              </a>
+              <NavButton to="/Menu" label="Menu" />
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                About
-              </a>
+              <NavButton to="/About" label="About" />
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                Contact
-              </a>
+              <NavButton to="/Contact" label="Contact" />
             </li>
             <li>
-              <a
-                href="#"
+              <NavLink
+                to="/Login"
+                id="NavElementLogout"
+                onClick={handleLogout}
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 Logout
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
-        <button className="btn btn-primary">Booking</button>
+        <button className="bookingButton">Booking</button>
       </div>
     </nav>
   );

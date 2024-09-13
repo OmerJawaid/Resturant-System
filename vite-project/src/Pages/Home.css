@@ -1,0 +1,165 @@
+.main{
+    background-color: white;
+}
+
+
+.Banner1{
+    width:100%;
+    height: auto;
+}
+
+.Banner1HeadElement{
+    position:relative;
+    align-items: center;
+    justify-content: center;
+}
+.Banner1Content{
+   position:absolute;
+   bottom: 25%;
+   left: 30%;
+   width:667px;
+   height: 392;
+   display: flex;
+   flex-direction: column;
+   justify-items: start;
+}
+
+.Banner1Content>h2{
+    font-size:6vw;
+    line-height: 120px;
+    margin-bottom: 20px;
+}
+
+.Banner1Content>p{
+    font-size: 20px;
+    justify-self: center;
+    align-self: center;
+    margin-bottom: 30px;
+}
+
+.Banner1Content>div{
+    align-items: center;
+
+}
+.Banner1Button1{
+    background-color:#AD343E ;
+    color: white;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+.Banner1Button1:hover{
+    border:1px solid black;
+}
+.Banner1Button2:hover{
+    border:1px solid black;
+}
+.BrowserMenu{
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
+.BrowserMenu>h2{
+font-size: 3vw;
+margin-top: 50px;
+margin-bottom: 40px;
+}
+.Cards{
+    display: flex;
+    gap:20px;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 60px;
+}
+.card{
+    border: 1px solid grey;
+    padding: 20px;
+ border-radius:12px;
+ 
+}
+
+.MainBanner2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+.Banner2{display: flex;
+width: 80vw;
+height: auto;
+position: relative;
+gap:15vw;
+align-items: center;
+}
+.Banner2image1{
+    max-width:35vw;
+    height:35vw;
+}
+
+.Banner2imageContent{
+background-color: #474747;
+color: white;
+width: 23vw;
+max-height:457px;
+align-items: center;
+position:absolute;
+top: 20vw;
+left:15vw;
+
+border-radius: 12px;
+padding: 30px;
+}
+
+.Banner2imageContent>h4{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    
+}
+
+.Banner2imageContent>div>div>p{
+    font-size: 12px;
+    font-weight: 200;
+    margin-left: 15px;
+    
+}
+
+.Banner2imageContent>div>div{display: flex;
+margin-top: 15px;}
+.Banner2imageContent>div>div>img{
+    width: 20px;
+    height: 20px;
+    align-self: center;
+}
+.Banner2Content{
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.Banner2Content>h2{
+    font-size: 3vw;
+    margin-bottom: 20px;
+}
+.Banner2Content>h4{
+    margin-bottom: 24px;
+    font-size: 16px;
+}
+.Banner2Content>p{
+    margin-bottom: 24px;
+    font-size: 14px;
+}
+.Banner2Content>button{
+    align-self: flex-start;
+    border-radius: 118px;
+    padding: 10px 20px;
+    
+}
+.Banner2Content>button:hover{
+    color: white;
+    background-color:#474747;
+    transition: background-color,color 1s ease;
+    border: 1px solid #474747;
+}

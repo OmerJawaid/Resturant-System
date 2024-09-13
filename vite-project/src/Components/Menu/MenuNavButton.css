@@ -1,0 +1,18 @@
+.SubNav{
+    border: 1px solid lightgrey;
+    border-radius: 50px;
+    padding:10px 30px;
+    list-style: none;
+}
+
+.SubNav>a{
+    color: black;
+    font-size: small;
+}
+
+.SubNav:hover{
+    border-color: black;
+}
+.SubNav>a:hover{
+color:black
+}

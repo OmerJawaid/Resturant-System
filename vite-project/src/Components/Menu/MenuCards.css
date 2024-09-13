@@ -1,0 +1,21 @@
+.Content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:15px;
+}
+.Content>div:first-child{
+    color: #AD343E;
+    margin-top: 8px;
+    margin-bottom: 5px;
+
+}
+.Content>div{
+    color:Black;
+    margin-bottom: 5px;
+}
+.Content>div:last-child{
+    font-size: 14px;
+    font-weight:400;
+    margin-bottom: 30px;
+}
