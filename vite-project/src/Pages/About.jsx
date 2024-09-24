@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../Components/Footer/Footer";
 import Headerbar from "../Components/Headerbar/Headerbar";
 import CustomerHeader from "../Components/Navbar/Customer Header";
 
@@ -14,6 +15,7 @@ const About = () => {
       />
       <CustomerHeader />
       About
+      <Footer />
     </div>
   );
 };

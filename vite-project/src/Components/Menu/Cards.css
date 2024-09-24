@@ -1,0 +1,19 @@
+.Main{
+    display: grid;
+    justify-items: center;
+}
+
+.HeadCards{
+    display:grid;
+    grid-row: auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 15vh 8vw;
+
+}
+.Cards{
+    border: 2px solid lightgrey;
+    border-radius: 12px;
+    border-top: none;
+    margin-bottom: 10px;
+}

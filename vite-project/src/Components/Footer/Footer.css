@@ -1,0 +1,77 @@
+.Footer{
+    background-color: #474747;
+    color:white;
+    padding:5vw;
+    padding-bottom: 20px;
+}
+.list1{
+    list-style: none;
+    color:White;
+}
+.Footer{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mainFooter{
+    width:80vw;
+}
+.Footer>div{
+    display: flex;
+    gap:10vw;
+}
+.firstElement{
+    max-width:25vw ;
+}
+.firstElement>div>button{
+    background-color: #AD343E;
+    max-width: 10vw;
+    padding: none;
+}
+.firstElement>div>button:hover{
+border: 1px solid black;
+
+}
+.firstElement>div{
+    display: flex;
+    gap :1vw;
+    margin-top: 15px;
+}
+.secondElement{
+    display: flex;
+    gap:5vw;
+}
+.secondElement>div>div{
+    font-size: large;
+    margin-bottom: 30px;
+    width: max-content;
+}
+.secondElement>div>ul>li>a{
+    color:lightgray;
+    font-size:medium;
+    font-weight: 100;
+
+}
+.secondElement>div>ul>li{
+    margin-bottom: 10px;
+    width: max-content;
+}
+.secondElement>div>ul>li>a:hover{
+color:white
+}
+.lastElement>div{
+    display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin-top:30px;
+
+}
+.lastElement>span{
+    font-size: large;
+    margin-bottom: 100px;
+    font-weight: 400;
+}
+.Copyright{
+    justify-content: center;
+    margin-top: 50px;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../../Components/Footer/Footer";
 import Headerbar from "../../Components/Headerbar/Headerbar";
 import Title from "../../Components/Menu/Title";
 import CustomerHeader from "../../Components/Navbar/Customer Header";
@@ -17,6 +18,7 @@ const MainDishes = () => {
       <div className="Main">
         <Title />
       </div>
+      <Footer />
     </div>
   );
 };

@@ -147,6 +147,47 @@ app.get('/allproductshow', async (req, res) => {
     }
 })
 
+app.get('/breakfast', async (req, res) => {
+    try {
+        const product = await ProductModel.find({ Category: "Breakfast" })
+        console.log(product);
+        res.json(product);
+    }
+    catch (err) {
+        console.log("Cannot get  Breakfast from DB: ", err)
+    }
+})
+app.get('/maindishes', async (req, res) => {
+    try {
+        const product = await ProductModel.find({ Category: "MainDishes" })
+        console.log(product);
+        res.json(product);
+    }
+    catch (err) {
+        console.log("Cannot get  Breakfast from DB: ", err)
+    }
+})
+app.get('/drinks', async (req, res) => {
+    try {
+        const product = await ProductModel.find({ Category: "Drinks" })
+        console.log(product);
+        res.json(product);
+    }
+    catch (err) {
+        console.log("Cannot get  Breakfast from DB: ", err)
+    }
+})
+app.get('/desserts', async (req, res) => {
+    try {
+        const product = await ProductModel.find({ Category: "Desserts" })
+        console.log(product);
+        res.json(product);
+    }
+    catch (err) {
+        console.log("Cannot get  Breakfast from DB: ", err)
+    }
+})
+
 app.listen(8081, () => {
     console.log('Listening');
 });

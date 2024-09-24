@@ -5,6 +5,7 @@ import "../App.css";
 import Card from "../Components/Home Components/Card";
 import "./Home.css";
 
+import Footer from "../Components/Footer/Footer";
 import Headerbar from "../Components/Headerbar/Headerbar";
 import CustomerHeader from "../Components/Navbar/Customer Header";
 
@@ -153,6 +154,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import Headerbar from "../../Components/Headerbar/Headerbar";
 import CustomerHeader from "../../Components/Navbar/Customer Header";
 import Title from "../../Components/Menu/Title";
+import Footer from "../../Components/Footer/Footer";
 
 const Drinks = () => {
   return (
@@ -17,6 +18,7 @@ const Drinks = () => {
       <div className="Main">
         <Title />
       </div>
+      <Footer/>
     </div>
   );
 };
