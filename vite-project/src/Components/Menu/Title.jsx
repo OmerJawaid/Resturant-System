@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./CategoryContext";
 import MenuNavButton from "./MenuNavButton";
 import "./Title.css";
 
 const Title = () => {
+  const value = useContext(UserContext);
   return (
     <div>
       <div className="Headings">
@@ -11,6 +13,7 @@ const Title = () => {
           We consider all the drivers of change gives you the components you
           need to change to create a truly happens.
         </h5>
+        <div>{value.label}</div>
       </div>
       <div className="MenuNav">
         <MenuNavButton label="All" to="/Menu" />

@@ -7,19 +7,19 @@ import { UserContext } from "./CategoryContext";
 import MenuCards from "./MenuCards";
 
 const Product = () => {
-  const [label, changelabel] = useContext(UserContext);
+  const value = useContext(UserContext);
   const [url, changeurl] = useState("http://localhost:8081/allproductshow");
   const [product, changeproduct] = useState([]);
   const urlChange = () => {
-    if (label == "All") {
+    if (value.label == "All") {
       changeurl("http://localhost:8081/allproductshow");
-    } else if (label == "Breakfast") {
+    } else if (value.label == "Breakfast") {
       changeurl("http://localhost:8081/breakfast");
-    } else if (label == "MainDishes") {
+    } else if (value.label == "MainDishes") {
       changeurl("http://localhost:8081/maindishes");
-    } else if (label == "Drinks") {
+    } else if (value.label == "Drinks") {
       changeurl("http://localhost:8081/drinks");
-    } else if (label == "Desserts") {
+    } else if (value.label == "Desserts") {
       changeurl("http://localhost:8081/desserts");
     }
   };
@@ -63,7 +63,7 @@ const Product = () => {
           </NavLink>
         );
       })}
-      {label}
+      {value.label}
     </div>
   );
 };

@@ -10,7 +10,7 @@ import Product from "../../Components/Menu/Product";
 import "./Menu.css";
 
 const Menu = () => {
-  const [label, changelabel] = useState();
+  const [label, setlabel] = useState("All");
   return (
     <div>
       <Headerbar
@@ -21,12 +21,13 @@ const Menu = () => {
         instagram="www.instagram.com"
       />
       <CustomerHeader />
-      <UserContext.Provider value={[label, changelabel]}>
+      <UserContext.Provider value={{ label, setlabel }}>
         <div className="Main">
-          <Title />
+          <Title /> {/* This should have access to the context */}
           <Product />
         </div>
       </UserContext.Provider>
+
       <Footer />
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+
 import { UserContext } from "./CategoryContext";
 import "./MenuNavButton.css";
 const MenuNavButton = (props) => {
@@ -7,10 +8,11 @@ const MenuNavButton = (props) => {
   const isActive = location.pathname === props.to;
   const Active = { backgroundColor: "#AD343E", color: "white" };
   const InActive = { backgroundColor: "white", color: "black" };
-  const { label, changelabel } = useContext(UserContext);
+  const value = useContext(UserContext);
+  const { label, setlabel } = value;
   useEffect(() => {
     if (isActive) {
-      changelabel(props.label);
+      setlabel(props.label);
     }
   }, []);
   return (
