@@ -17,6 +17,7 @@ const Productsadd = () => {
       Product.push(Item);
       console.log(Item);
       await axios.post("http://localhost:8081/products", Item);
+
       alert("Added item sucessfully");
     } catch (err) {
       console.log("Not added: " + err);

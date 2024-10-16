@@ -1,16 +1,15 @@
 import React, { useState } from "react";
+import Footer from "../../Components/Footer/Footer";
 import Headerbar from "../../Components/Headerbar/Headerbar";
-
+import { CategoryContext } from "../../Components/Menu/CategoryContext";
+import Product from "../../Components/Menu/Product";
 import Title from "../../Components/Menu/Title";
 import CustomerHeader from "../../Components/Navbar/Customer Header";
-
-import Footer from "../../Components/Footer/Footer";
-import { UserContext } from "../../Components/Menu/CategoryContext";
-import Product from "../../Components/Menu/Product";
 import "./Menu.css";
 
 const Menu = () => {
   const [label, setlabel] = useState("All");
+
   return (
     <div>
       <Headerbar
@@ -21,12 +20,14 @@ const Menu = () => {
         instagram="www.instagram.com"
       />
       <CustomerHeader />
-      <UserContext.Provider value={{ label, setlabel }}>
+
+      {/* Ensure that both label and setlabel are passed correctly */}
+      <CategoryContext.Provider value={{ label, setlabel }}>
         <div className="Main">
-          <Title /> {/* This should have access to the context */}
+          <Title />
           <Product />
         </div>
-      </UserContext.Provider>
+      </CategoryContext.Provider>
 
       <Footer />
     </div>

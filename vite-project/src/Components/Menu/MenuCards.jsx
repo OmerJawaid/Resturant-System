@@ -5,7 +5,7 @@ const Cards = (props) => {
   return (
     <div>
       <div className="Image">
-        <img src={props.mainimage}></img>
+        <img src={props.mainimage} style={{ width: "100%" }}></img>
       </div>
       <div className="Content">
         <div>${props.price}</div>

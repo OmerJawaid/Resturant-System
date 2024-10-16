@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { UserContext } from "./CategoryContext";
+import { CategoryContext } from "./CategoryContext";
 import MenuNavButton from "./MenuNavButton";
 import "./Title.css";
 
 const Title = () => {
-  const value = useContext(UserContext);
+  const value = useContext(CategoryContext); // Make sure context has both label and setlabel
+  console.log("Title component context value:", value);
+
   return (
     <div>
       <div className="Headings">
@@ -16,6 +18,7 @@ const Title = () => {
         <div>{value.label}</div>
       </div>
       <div className="MenuNav">
+        {/* MenuNavButton uses context here */}
         <MenuNavButton label="All" to="/Menu" />
         <MenuNavButton label="Breakfast" to="/Menu/Breakfast" />
         <MenuNavButton label="Main Dishes" to="/Menu/Main-Dishes" />

@@ -1,9 +1,9 @@
 import React from "react";
+import Footer from "../../Components/Footer/Footer";
 import Headerbar from "../../Components/Headerbar/Headerbar";
 import Title from "../../Components/Menu/Title";
 import CustomerHeader from "../../Components/Navbar/Customer Header";
 import "./Menu.css";
-import Footer from "../../Components/Footer/Footer";
 
 const Breakfast = () => {
   return (
@@ -19,7 +19,7 @@ const Breakfast = () => {
       <div className="Main">
         <Title />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -1,0 +1,13 @@
+.productpage{
+margin-left: 5vw;
+margin-right:5vw;
+margin-top:50px;
+}
+.productpage>div{
+    display:flex;
+    gap:10vw;}
+.Details{
+border:1px solid black;
+width:30vw;
+border-radius: 12px;
+}

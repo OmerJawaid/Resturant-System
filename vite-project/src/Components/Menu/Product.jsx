@@ -3,11 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Products from "../Products";
 import "./Cards.css";
-import { UserContext } from "./CategoryContext";
+import { CategoryContext } from "./CategoryContext";
 import MenuCards from "./MenuCards";
 
 const Product = () => {
-  const value = useContext(UserContext);
+  const value = useContext(CategoryContext);
   const [url, changeurl] = useState("http://localhost:8081/allproductshow");
   const [product, changeproduct] = useState([]);
   const urlChange = () => {
@@ -53,7 +53,11 @@ const Product = () => {
     <div className="HeadCards">
       {product.map((Products) => {
         return (
-          <NavLink key={Products.getID()} className="Cards">
+          <NavLink
+            to={`/Product/${Products.ID}`}
+            key={Products.getID()}
+            className="Cards"
+          >
             <MenuCards
               mainimage={Products.getMainimage()}
               price={Products.getPrice()}

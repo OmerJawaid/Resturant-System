@@ -72,16 +72,29 @@ app.post('/login', async (req, res) => {
         if (!isPasswordCorrect) {
             return res.status(401).json({ message: "Incorrect password" });
         }
-
-        req.session.Authenticate = true; // Store the email in session
-        req.session.save((err) => {
-            if (err) {
-                return res.status(500).json({ message: "Session save error: " + err.message });
+        try {
+            req.session.Userdata = {
+                firstname_session: user.FirstName,
+                lastname_session: user.LastName,
+                username_session: user.Username,
+                email_session: user.Email,
+                phone_session: user.Phone,
             }
-            console.log("Session ID:", req.sessionID);
-            console.log('Session initialized:', req.session.Authenticate);
-            res.status(200).json({ message: "Login successful", user: user.Email });
-        });
+
+            console.log(req.session.Userdata)
+            req.session.Authenticate = true; // Store the email in session
+            req.session.save((err) => {
+                if (err) {
+                    return res.status(500).json({ message: "Session save error: " + err.message });
+                }
+                console.log("Session ID:", req.sessionID);
+                console.log('Session initialized:', req.session.Authenticate);
+                res.status(200).json({ message: "Login successful", user: user.Email });
+            });
+        }
+        catch (err) {
+            res.status(500).json({ message: "Login Issue: " + err.message });
+        }
     } catch (err) {
         res.status(500).json({ message: "Login Issue: " + err.message });
     }
@@ -187,6 +200,29 @@ app.get('/desserts', async (req, res) => {
         console.log("Cannot get  Breakfast from DB: ", err)
     }
 })
+
+app.get('/product/:ProductID', async (req, res) => {
+    const { ProductID } = req.params;
+    try {
+        const product = await ProductModel.findOne({ ID: ProductID }); // Adjust based on your schema
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' }); // Return JSON response
+        }
+        res.json(product); // Send JSON response if product exists
+    } catch (err) {
+        console.log("Error fetching product: ", err);
+        res.status(500).json({ error: 'Internal Server Error' }); // Handle server errors with JSON
+    }
+});
+
+app.get('/getuserdata', async (req, res) => {
+    if (req.session.Authenticate == true) {
+        console.log("get user data : " + req.session.Userdata)
+        res.status(201).json(req.session.Userdata)
+
+    }
+})
+
 
 app.listen(8081, () => {
     console.log('Listening');
