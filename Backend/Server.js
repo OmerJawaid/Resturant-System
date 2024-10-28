@@ -16,7 +16,7 @@ const store = new MongoDBSession({
     uri: uriMongodb,
     collection: "session",
 })
-
+app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: "key that will sign cookie",
     resave: false,
@@ -32,7 +32,7 @@ mongoose.connect("mongodb://localhost:27017/ResturantSystem")
     .then(() => { console.log("Connected to DataBase") })
     .catch((err) => { console.log("Error connecting: " + err) });
 
-// Schema Creation (Structure) and model making
+
 const UserSchema = mongoose.Schema({
     FirstName: { type: String, required: true },
     LastName: { type: String, required: true },
@@ -41,7 +41,20 @@ const UserSchema = mongoose.Schema({
     Phone: String,
     Password: { type: String, required: true }
 });
+
 const UserModel = mongoose.model('registeruser', UserSchema);
+
+app.get('/getuserdata', (req, res) => {
+    if (req.session && req.session.Userdata) {
+        console.log("Session Data: ", req.session.Userdata);
+        res.json("Hello" + req.session.Userdata._id);
+        res.json(req.session.Userdata);
+
+    } else {
+        res.status(404).json({ message: "No user data found in session" });
+    }
+});
+
 
 
 
@@ -124,7 +137,6 @@ app.post('/destroy', (req, res) => {
         res.status(200).json({ message: "Session destroyed and cookie cleared" });
     });
 });
-
 
 const ProductSchema = mongoose.Schema({
     ID: { type: Number, required: true, unique: true },
@@ -215,13 +227,12 @@ app.get('/product/:ProductID', async (req, res) => {
     }
 });
 
-app.get('/getuserdata', async (req, res) => {
-    if (req.session.Authenticate == true) {
-        console.log("get user data : " + req.session.Userdata)
-        res.status(201).json(req.session.Userdata)
 
-    }
-})
+
+
+// app.post('Cart', (req, res) => {
+
+// })
 
 
 app.listen(8081, () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import Productsadd from "./Components/Productsadd.jsx";
@@ -16,8 +16,6 @@ import Menu from "./Pages/Menu/Menu.jsx";
 import ProductPage from "./Pages/Products/ProductPage.jsx";
 
 function App() {
-  const [label, setlabel] = useState("All");
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -64,7 +62,7 @@ function App() {
       element: <Desserts />,
     },
     { path: "/Product/:ProductID", element: <ProductPage /> },
-    { path: "/Cart/:_id", element: <Cart /> },
+    { path: "/cart", element: <Cart /> },
   ]);
 
   return (
