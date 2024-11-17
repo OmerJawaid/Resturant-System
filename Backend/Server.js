@@ -1,17 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const session = require("express-session")
+const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session)
 
 //App Integration
 const app = express();
+app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173', // Your front-end URL
-    credentials: true, // Allow credentials (cookies, etc.)
+    origin: 'http://localhost:5173',
+    credentials: true,
 }));
 const uriMongodb = "mongodb://localhost:27017/ResturantSystem"
-app.use(express.json());
+
 const store = new MongoDBSession({
     uri: uriMongodb,
     collection: "session",
@@ -34,6 +35,7 @@ mongoose.connect("mongodb://localhost:27017/ResturantSystem")
 
 
 const UserSchema = mongoose.Schema({
+
     FirstName: { type: String, required: true },
     LastName: { type: String, required: true },
     Username: { type: String, unique: true, required: true },
@@ -43,6 +45,14 @@ const UserSchema = mongoose.Schema({
 });
 
 const UserModel = mongoose.model('registeruser', UserSchema);
+
+const CartSchema = mongoose.Schema({
+    CustomerID: { type: mongoose.Schema.Types.ObjectId, required: true },
+    Creation_Date: { type: Date, required: true },
+    Total_Amount: { type: Number, required: false, default: 0 }
+})
+
+const CartModel = mongoose.model("carts", CartSchema);
 
 app.get('/getuserdata', (req, res) => {
     if (req.session && req.session.Userdata) {
@@ -54,9 +64,6 @@ app.get('/getuserdata', (req, res) => {
         res.status(404).json({ message: "No user data found in session" });
     }
 });
-
-
-
 
 app.post('/registeruser', async (req, res) => {
     const { FirstName, LastName, Username, Email, Phone, Password } = req.body;
@@ -71,10 +78,25 @@ app.post('/registeruser', async (req, res) => {
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
+
+
+
+    const user = await UserModel.findOne({ Email });
+    const CustomerID = user._id;
+    const Creation_Date = new Date();
+    const NewCart = new CartModel({ CustomerID, Creation_Date })
+    try {
+        const SaveCart = await NewCart.save();
+        console.log("Sucessfully added cart to db");
+    }
+    catch (err) {
+        console.log("Error: " + err.message);
+    }
 });
 
 app.post('/login', async (req, res) => {
     const { Email, Password } = req.body;
+
     try {
         const user = await UserModel.findOne({ Email });
         if (!user) {
@@ -87,6 +109,7 @@ app.post('/login', async (req, res) => {
         }
         try {
             req.session.Userdata = {
+                _id_session: user._id,
                 firstname_session: user.FirstName,
                 lastname_session: user.LastName,
                 username_session: user.Username,
@@ -94,14 +117,11 @@ app.post('/login', async (req, res) => {
                 phone_session: user.Phone,
             }
 
-            console.log(req.session.Userdata)
             req.session.Authenticate = true; // Store the email in session
             req.session.save((err) => {
                 if (err) {
                     return res.status(500).json({ message: "Session save error: " + err.message });
                 }
-                console.log("Session ID:", req.sessionID);
-                console.log('Session initialized:', req.session.Authenticate);
                 res.status(200).json({ message: "Login successful", user: user.Email });
             });
         }
@@ -114,15 +134,12 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/authentication', (req, res) => {
-    console.log("Authentication route hit");
-    console.log("Session ID:", req.sessionID);
-    console.log("Session Data:", req.session);
-    console.log("Authentication: " + req.session.Authenticate);
+
     if (req.session.Authenticate) {
-        console.log("Authentication true");
+
         res.status(200).json({ Authenticate: true });
     } else {
-        console.log("Authentication false");
+
         res.status(401).json({ Authenticate: false });
     }
 });
@@ -147,6 +164,8 @@ const ProductSchema = mongoose.Schema({
     Mainimage: { type: String, required: true },
 })
 const ProductModel = mongoose.model("products", ProductSchema);
+
+
 
 app.post('/products', async (req, res) => {
     const { ID, Name, Description, Price, Category, Mainimage } = req.body;
@@ -228,13 +247,32 @@ app.get('/product/:ProductID', async (req, res) => {
 });
 
 
+//Cart
+const CartItemSchema = mongoose.Schema({
+    CartID: { type: mongoose.Schema.Types.ObjectId, required: true },
+    ItemID: { type: Number, required: true },
+})
+const Cart_Item_Model = mongoose.model('cartitem', CartItemSchema);
+
+app.post('cartitemdata', async (req, res) => {
+    const { ItemID } = req.body;
+    const Customer_ID = req.session._id;
+    const Cart_Info = await CartModel.findOne({ Customer_ID });
+    const CartID = Cart_Info._id;
+    const NewCartItem = new Cart_Item_Model({ CartID, ItemID })
+    res.Customer_ID;
+    try {
+        const SaveCartItem = await NewCartItem.save();
+        console.log("Cart item : " + SaveCartItem + "  Sucessfully Saved");
+
+    }
+    catch (err) {
+        console.log("Error In CartItemData Saving:  " + err.message);
+    }
+
+})
 
 
-// app.post('Cart', (req, res) => {
-
-// })
-
-
-app.listen(8081, () => {
+app.listen(8081, '192.168.1.91', () => {
     console.log('Listening');
 });
