@@ -1,11 +1,38 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Customer Header.css";
 import NavButton from "./NavButton";
 
 const CustomerHeader = () => {
   const navigate = useNavigate;
+
+  const [Authenticate, changeAuthenticate] = useState(null);
+  useEffect(() => {
+    const authenticateCheck = async () => {
+      console.log("Authentication check started");
+      try {
+        const response = await axios.get(
+          "http://localhost:8081/authentication",
+          {
+            withCredentials: true,
+          }
+        );
+
+        if (typeof response.data.Authenticate === "boolean") {
+          changeAuthenticate(response.data.Authenticate);
+        } else {
+          console.error("Unexpected response data:", response.data);
+          changeAuthenticate(false); // Fallback to false if unexpected response
+        }
+      } catch (error) {
+        console.error("Error during authentication check:", error);
+        changeAuthenticate(false); // Set to false on error
+      }
+    };
+    authenticateCheck();
+  }, []);
+
   const handleLogout = async () => {
     try {
       await axios.post(
@@ -78,6 +105,11 @@ const CustomerHeader = () => {
             <li>
               <NavButton to="/Contact" label="Contact" />
             </li>
+            {Authenticate && (
+              <li>
+                <NavButton to="/Cart" label="Cart"></NavButton>
+              </li>
+            )}
             <li>
               <NavLink
                 to="/Login"

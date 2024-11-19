@@ -4,8 +4,42 @@ import Footer from "../Components/Footer/Footer";
 import Headerbar from "../Components/Headerbar/Headerbar";
 import CustomerHeader from "../Components/Navbar/Customer Header";
 
+import { useNavigate } from "react-router-dom";
+
 const Cart = () => {
   const [User_Data, set_User_Data] = useState(null);
+  const [Authenticate, changeAuthenticate] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const authenticateCheck = async () => {
+      console.log("Authentication check started");
+      try {
+        const response = await axios.get(
+          "http://localhost:8081/authentication",
+          {
+            withCredentials: true,
+          }
+        );
+
+        if (typeof response.data.Authenticate === "boolean") {
+          changeAuthenticate(response.data.Authenticate);
+        } else {
+          console.error("Unexpected response data:", response.data);
+          changeAuthenticate(false); // Fallback to false if unexpected response
+        }
+      } catch (error) {
+        console.error("Error during authentication check:", error);
+        changeAuthenticate(false); // Set to false on error
+      }
+    };
+    authenticateCheck();
+  }, []);
+  useEffect(() => {
+    if (Authenticate === false) {
+      navigate("/Login");
+    }
+  }, [Authenticate, navigate]);
+
   const User_Data_Server = async () => {
     try {
       const result = await axios.get("http://localhost:8081/getuserdata", {

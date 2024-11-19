@@ -47,9 +47,15 @@ const ProductPage = () => {
     console.log(product);
     const ItemID = product.ID; // Ensure this is defined
     try {
-      const response = await axios.post("http://localhost:8081/addtocart/", {
-        ItemID,
-      });
+      const response = await axios.post(
+        "http://localhost:8081/addtocart/",
+        {
+          ItemID,
+        },
+        {
+          withCredentials: true, // Ensure the session cookie is included in the request
+        }
+      );
       console.log("Response:", response.data);
     } catch (err) {
       console.error("Error adding to cart:", err.message);
@@ -79,10 +85,10 @@ const ProductPage = () => {
                 src={product.Mainimage}
                 style={{ borderRadius: "1.5vw", width: "35vw" }}
               ></img>
+
               <div className="Details">
                 <p>Product ID: {product.ID}</p>
                 <h6>{product.Name}</h6>
-
                 <p>Price: {product.Price}</p>
                 <p>Category: {product.Category}</p>
                 <button onClick={AddToCart}>Add to Cart</button>
