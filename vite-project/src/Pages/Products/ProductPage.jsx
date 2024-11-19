@@ -11,6 +11,7 @@ const ProductPage = () => {
   const [product, setProduct] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [ItemID, changeItemID] = useState();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -44,8 +45,15 @@ const ProductPage = () => {
   const AddToCart = async (e) => {
     e.preventDefault();
     console.log(product);
-    const ItemID = product.ID;
-    await axios.post("http://localhost:8081/cartitemdata/", { ItemID });
+    const ItemID = product.ID; // Ensure this is defined
+    try {
+      const response = await axios.post("http://localhost:8081/addtocart/", {
+        ItemID,
+      });
+      console.log("Response:", response.data);
+    } catch (err) {
+      console.error("Error adding to cart:", err.message);
+    }
   };
 
   if (loading) return <div>Loading...</div>; // Show loading indicator while fetching
@@ -60,15 +68,7 @@ const ProductPage = () => {
         instagram="www.instagram.com"
       />
       <CustomerHeader />
-      <iframe
-      //  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1704421.0588515978!2d73.36273471334496!3d33.450677410701395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfe9b4e8f54775%3A0xa3002f9286d049ff!2sSt%2015%2C%20Bahria%20Enclave%20Sector%20C%2C%20Islamabad%2C%20Islamabad%20Capital%20Territory%2C%20Pakistan!5e0!3m2!1sen!2s!4v1731065121228!5m2!1sen!2s"
-      //  width="600"
-      //  height="450"
-      //  style={{ border: "0" }}
-      //  allowfullscreen=""
-      //  loading="lazy"
-      //  referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
+
       <div>
         {error ? (
           <p>Error: {error}</p> // Display error message if there is an error

@@ -254,7 +254,7 @@ const CartItemSchema = mongoose.Schema({
 })
 const Cart_Item_Model = mongoose.model('cartitem', CartItemSchema);
 
-app.post('cartitemdata', async (req, res) => {
+app.post('/addtocart', async (req, res) => {
     const { ItemID } = req.body;
     const Customer_ID = req.session._id;
     const Cart_Info = await CartModel.findOne({ Customer_ID });
@@ -273,6 +273,6 @@ app.post('cartitemdata', async (req, res) => {
 })
 
 
-app.listen(8081, '192.168.1.91', () => {
+app.listen(8081, () => {
     console.log('Listening');
 });
