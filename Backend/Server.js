@@ -254,13 +254,28 @@ const CartItemSchema = mongoose.Schema({
 })
 const Cart_Item_Model = mongoose.model('cartitem', CartItemSchema);
 
+const cartupdate = async (_id, ID) => {
+    try {
+        const Product_Info = await ProductModel.findOne({ ID });
+        const Item_Price = Product_Info.Price;
+        console.log("Item Price is: " + Item_Price);
+        const updated_amount = await CartModel.updateOne({ _id }, { $inc: { Total_Amount: Item_Price } });
+        console.log("The Updated Amount of: " + updated_amount);
+    }
+    catch (err) {
+        console.log("Err in Updating Cart total price: " + err);
+    }
+}
+
 app.post('/addtocart', async (req, res) => {
     const { ItemID } = req.body;
-    const Customer_ID = req.session._id;
-    const Cart_Info = await CartModel.findOne({ Customer_ID });
+    const CustomerID = req.session.Userdata._id_session;
+    // console.log("Customer ID: " + CustomerID)
+    const Cart_Info = await CartModel.findOne({ CustomerID });
+    // console.log(Cart_Info);
     const CartID = Cart_Info._id;
     const NewCartItem = new Cart_Item_Model({ CartID, ItemID })
-    res.Customer_ID;
+    cartupdate(CartID, ItemID);
     try {
         const SaveCartItem = await NewCartItem.save();
         console.log("Cart item : " + SaveCartItem + "  Sucessfully Saved");
