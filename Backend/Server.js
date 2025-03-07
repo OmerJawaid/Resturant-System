@@ -217,9 +217,8 @@ app.get('/product/:ProductID', async (req, res) => {
 
 app.get('/getuserdata', async (req, res) => {
     if (req.session.Authenticate == true) {
-        console.log("get user data : " + req.session.Userdata)
+        console.log("get user data : " + req.session.Userdata.username_session)
         res.status(201).json(req.session.Userdata)
-
     }
 })
 

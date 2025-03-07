@@ -35,7 +35,6 @@ const Home = () => {
         changeAuthenticate(false); // Set to false on error
       }
     };
-
     authenticateCheck();
   }, []);
 

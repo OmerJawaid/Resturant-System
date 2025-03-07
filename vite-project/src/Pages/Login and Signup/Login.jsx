@@ -76,6 +76,9 @@ const Login = () => {
       console.log(err);
     }
   };
+   const Signup=()=>{
+    navigate("/Signup")
+   }
 
   return (
     <div
@@ -107,7 +110,7 @@ const Login = () => {
             </button>
             <div className="LoginFrameSpacer"></div>
             <p>
-              Create an account? <b>SignIn</b>
+              Create an account? <a href=""onClick={Signup}>SignUp</a>
             </p>
           </div>
         </form>
