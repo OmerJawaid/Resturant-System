@@ -18,9 +18,13 @@ const Signup = () => {
     try {
       const newUser = { FirstName, LastName, Username, Email, Phone, Password };
       await axios.post("http://localhost:8081/registeruser", newUser);
-      alert("User Rejisterd");
+      alert("User Registered");
     } catch (err) {
-      console.log("Not added: " + err);
+      // Log the error response for more details
+      console.error(
+        "Not added: ",
+        err.response ? err.response.data : err.message
+      );
     }
   };
 
