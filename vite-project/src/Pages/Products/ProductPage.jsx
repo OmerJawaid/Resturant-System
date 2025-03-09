@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Footer from "../../Components/Footer/Footer";
 import Headerbar from "../../Components/Headerbar/Headerbar";
 import CustomerHeader from "../../Components/Navbar/Customer Header";
