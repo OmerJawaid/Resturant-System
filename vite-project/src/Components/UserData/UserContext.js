@@ -8,4 +8,4 @@ export const UserContext = createContext({
     Email: "",
     Phone: "",
     Password: "",
-})
+}) 

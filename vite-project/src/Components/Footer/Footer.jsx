@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 const Footer = () => {
@@ -7,14 +7,14 @@ const Footer = () => {
     <div className="Footer">
       <div className="mainFooter">
         <div className="firstElement">
-          <a
-            href="Home"
+          <Link
+            to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
               src="https://i.postimg.cc/Wz9QggM8/japanese-food.png"
               className="h-8"
-              alt="Resturant"
+              alt="Restaurant"
               height={56}
               width={35}
             />
@@ -23,23 +23,23 @@ const Footer = () => {
               className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white"
               style={{ color: "white" }}
             >
-              Resturant
+              Restaurant
             </span>
-          </a>
+          </Link>
           <div>
             In the new era of technology we look a in the future with certainty
             and pride to for our company and.
           </div>
           <div>
-            <button>
-              <img src="https://i.postimg.cc/zG9Q9yVw/Facebook.png"></img>
-            </button>
-            <button>
-              <img src="https://i.postimg.cc/ydKb82hk/Instagram.png"></img>
-            </button>
-            <button>
-              <img src="https://i.postimg.cc/xdMZY9zw/Twitter.png"></img>
-            </button>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <img src="https://i.postimg.cc/zG9Q9yVw/Facebook.png" alt="Facebook" />
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+              <img src="https://i.postimg.cc/ydKb82hk/Instagram.png" alt="Instagram" />
+            </a>
+            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+              <img src="https://i.postimg.cc/xdMZY9zw/Twitter.png" alt="Twitter" />
+            </a>
           </div>
         </div>
         <div className="secondElement">
@@ -47,25 +47,25 @@ const Footer = () => {
             <div>Pages</div>
             <ul className="list1">
               <li className="list1">
-                <NavLink to="./">Home</NavLink>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <NavLink to="./About">About</NavLink>
+                <Link to="/About">About</Link>
               </li>
               <li>
-                <NavLink to="./Menu">Menu</NavLink>
+                <Link to="/Menu">Menu</Link>
               </li>
               <li>
-                <NavLink to="./Pricing">Pricing</NavLink>
+                <Link to="/Blog">Blog</Link>
               </li>
               <li>
-                <NavLink to="./Blog">Blog</NavLink>
+                <Link to="/Contact">Contact</Link>
               </li>
               <li>
-                <NavLink to="./Contact">Contact</NavLink>
+                <Link to="/cart">Cart</Link>
               </li>
               <li>
-                <NavLink to="./Delivery">Delivery</NavLink>
+                <Link to="/my-orders">My Orders</Link>
               </li>
             </ul>
           </div>
@@ -73,25 +73,22 @@ const Footer = () => {
             <div>Utility Pages</div>
             <ul>
               <li>
-                <NavLink>Start Here</NavLink>
+                <Link to="/profile">Profile</Link>
               </li>
               <li>
-                <NavLink>Styleguide</NavLink>
+                <Link to="/Login">Login</Link>
               </li>
               <li>
-                <NavLink>Password Protected</NavLink>
+                <Link to="/Signup">Sign Up</Link>
               </li>
               <li>
-                <NavLink>404 Not Found</NavLink>
+                <Link to="/checkout">Checkout</Link>
               </li>
               <li>
-                <NavLink>Licenses</NavLink>
+                <Link to="/">Terms & Conditions</Link>
               </li>
               <li>
-                <NavLink>Changelog</NavLink>
-              </li>
-              <li>
-                <NavLink>View More</NavLink>
+                <Link to="/">Privacy Policy</Link>
               </li>
             </ul>
           </div>
@@ -99,15 +96,15 @@ const Footer = () => {
         <div className="lastElement">
           <span>Follow Us On Instagram</span>
           <div>
-            <img src="https://i.postimg.cc/ThMrG5Wm/Image1.png"></img>
-            <img src="https://i.postimg.cc/MZj3kyCn/Image2.png"></img>
-            <img src="https://i.postimg.cc/W3q8vvfB/Image3.png"></img>
-            <img src="https://i.postimg.cc/7YkVpj1R/Image-4.png"></img>
+            <img src="https://i.postimg.cc/ThMrG5Wm/Image1.png" alt="Instagram 1" />
+            <img src="https://i.postimg.cc/MZj3kyCn/Image2.png" alt="Instagram 2" />
+            <img src="https://i.postimg.cc/W3q8vvfB/Image3.png" alt="Instagram 3" />
+            <img src="https://i.postimg.cc/7YkVpj1R/Image-4.png" alt="Instagram 4" />
           </div>
         </div>
       </div>
       <div className="Copyright">
-        Copyright © 2024 Resturant. All Rights Reserved
+        Copyright © {new Date().getFullYear()} Restaurant. All Rights Reserved
       </div>
     </div>
   );

@@ -1,35 +1,37 @@
-import axios from "axios";
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Customer Header.css";
 import NavButton from "./NavButton";
+import { useAuth } from "../AuthContext";
+import { useCart } from "../CartContext";
 
 const CustomerHeader = () => {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
+  const { isAuthenticated, logout, userData } = useAuth();
+  const { cartItems } = useCart();
+
   const handleLogout = async () => {
     try {
-      await axios.post(
-        "http://localhost:8081/destroy",
-        {},
-        { withCredentials: true }
-      );
-      navigate("/login");
+      const result = await logout();
+      if (result.success) {
+        navigate("/");
+      }
     } catch (error) {
-      console.error("Error:", error.response?.data?.message || error.message);
+      console.error("Error:", error);
     }
   };
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a
-          href="Home"
+        <NavLink
+          to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
             src="https://i.postimg.cc/Wz9QggM8/japanese-food.png"
             className="h-8"
-            alt="Resturant"
+            alt="Restaurant"
             height={56}
             width={35}
           />
@@ -37,13 +39,13 @@ const CustomerHeader = () => {
             id="LogoName"
             className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white"
           >
-            Resturant
+            Restaurant
           </span>
-        </a>
+        </NavLink>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-primary-600"
           aria-controls="navbar-default"
           aria-expanded="false"
         >
@@ -79,18 +81,64 @@ const CustomerHeader = () => {
               <NavButton to="/Contact" label="Contact" />
             </li>
             <li>
-              <NavLink
-                to="/Login"
-                id="NavElementLogout"
-                onClick={handleLogout}
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-              >
-                Logout
-              </NavLink>
+              <NavButton to="/Blog" label="Blog" />
             </li>
+            {isAuthenticated ? (
+              <>
+                <li>
+                  <NavButton to="/profile" label="Profile" />
+                </li>
+                <li>
+                  <NavButton to="/my-orders" label="My Orders" />
+                </li>
+                <li>
+                  <NavLink
+                    to="/"
+                    id="NavElementLogout"
+                    onClick={handleLogout}
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-primary-600 md:p-0 dark:text-white md:dark:hover:text-primary-600 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    Logout
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <NavLink
+                    to="/Login"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-primary-600 md:p-0 dark:text-white md:dark:hover:text-primary-600 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/Signup"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-primary-600 md:p-0 dark:text-white md:dark:hover:text-primary-600 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    Sign Up
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
-        <button className="bookingButton">Booking</button>
+        <div className="flex items-center space-x-4">
+          <NavLink to="/cart" className="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700 hover:text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            {cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-primary-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                {cartItems.length}
+              </span>
+            )}
+          </NavLink>
+          <NavLink to="/checkout" className="bg-primary-600 text-white px-4 py-2 rounded hover:bg-primary-700 focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 transition-colors duration-200">
+            Book a Table
+          </NavLink>
+        </div>
       </div>
     </nav>
   );

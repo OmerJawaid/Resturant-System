@@ -7,16 +7,16 @@ const NavButton = (props) => {
   const isActive =
     location.pathname === props.to ||
     location.pathname.startsWith(props.to + "/");
-  const activeStyle = { backgroundColor: "#DBDFD0" };
-  const inactiveStyle = { backgroundColor: "none" };
+  
   return (
     <div>
       <NavLink
         to={props.to}
         id="NavElement"
-        className="block py-2 px-3 text-black bg-grey-700 rounded md:bg-transparent md:text-white-700 md:p-0 dark:text-white md:dark:text-grey-500"
-        aria-current="page"
-        style={isActive ? activeStyle : inactiveStyle}
+        className={`block py-2 px-3 text-black rounded md:bg-transparent md:p-0 dark:text-white transition-colors duration-200 hover:text-primary-600 focus:text-primary-600 ${
+          isActive ? "text-primary-600 font-semibold" : "text-gray-700 dark:text-gray-300"
+        }`}
+        aria-current={isActive ? "page" : undefined}
       >
         {props.label}
       </NavLink>

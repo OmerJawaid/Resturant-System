@@ -30,7 +30,6 @@
 }
 
 .Frame{
-    
     width:35vw;
     max-width:578px;
     max-height: 600px;
@@ -46,10 +45,11 @@
 }
 
 .Form p{
-color:#989898
+    color:#989898
 }
 .Form p b{
-    color:black;
+    color:#AD343E;
+    cursor: pointer;
 }
 
 .Form h4{
@@ -69,10 +69,17 @@ color:#989898
     border-radius: 20px;
     padding:3px;
     padding-left: 10px;
-    padding-right:10px;;
+    padding-right:10px;
     max-width: 100%;
     background-color: #e0e4e4;
     margin-bottom: 4vh;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.Inputs input:focus {
+    outline: none;
+    border-color: #AD343E;
+    box-shadow: 0 0 0 2px rgba(173, 52, 62, 0.2);
 }
 
 .Inputs label{
@@ -81,10 +88,30 @@ color:#989898
 }
 
 .Form button{
-width: 100%;
-
+    width: 100%;
+    background-color: #AD343E;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
+.Form button:hover {
+    background-color: #8A2A32;
+}
+
+.Form button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(173, 52, 62, 0.3);
+}
+
+.LoginButtonLoginFrame {
+    background-color: #AD343E;
+    color: white;
+}
 
 .FirstLast{
     display: grid;
@@ -96,11 +123,19 @@ width: 100%;
     border-radius: 20px;
     padding:3px;
     padding-left: 10px;
-    padding-right:10px;;
+    padding-right:10px;
     max-width: 70%;
     background-color: #e0e4e4;
     margin-bottom: 4vh;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
+
+.FirstLast input:focus {
+    outline: none;
+    border-color: #AD343E;
+    box-shadow: 0 0 0 2px rgba(173, 52, 62, 0.2);
+}
+
 .FirstLast label{
     color:#989898;
     margin-left: 15px;

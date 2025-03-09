@@ -1,81 +1,65 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "./Base.css";
 import Base from "./Base.jsx";
 import Navbar from "./Navbar.jsx";
+import { useAuth } from "../../Components/AuthContext";
+
 const Login = () => {
-  const [Email, changeEmail] = useState("");
-  const [Password, changepassword] = useState("");
-  const [Authenticate, changeAuthenticate] = useState(false);
-  const [Loading, setLoading] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login, isAuthenticated, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get the return URL from location state or default to home
+  const from = location.state?.from || "/";
+
   useEffect(() => {
-    const authenticationCheck = async () => {
-      try {
-        const res = await axios.get("http://localhost:8081/authentication", {
-          withCredentials: true,
-        });
-
-        if (typeof res.data.Authenticate === "boolean") {
-          changeAuthenticate(res.data.Authenticate);
-        } else {
-          console.error("Unexpected response data:", res.data);
-          changeAuthenticate(false);
-        }
-      } catch (err) {
-        console.log(err);
-        changeAuthenticate(false);
-      } finally {
-        setLoading(false);
-      }
-    };
-    authenticationCheck();
-  }, []);
-
-  // Handle navigation based on authentication status
-  useEffect(() => {
-    if (Loading) return;
-
-    console.log("Authenticate state:", Authenticate);
-    if (Authenticate === true) {
-      navigate("/"); // Redirect to Home if authenticated
+    // If already authenticated and not loading, redirect
+    if (isAuthenticated && !loading) {
+      navigate(from, { replace: true });
     }
-    // No need to navigate to /Login as you're already on it
-  }, [Authenticate, Loading, navigate]);
+  }, [isAuthenticated, loading, navigate, from]);
 
-  const EmailInputHandler = (e) => {
-    changeEmail(e.target.value);
-    console.log(Email);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
-  const PasswordInputHandler = (e) => {
-    changepassword(e.target.value);
-    console.log(Password);
+  
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
-  const LoginCheck = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+    
+    if (!email || !password) {
+      setError("Please enter both email and password");
+      return;
+    }
+
     try {
-      const response = await axios.post(
-        "http://localhost:8081/login",
-        {
-          Email,
-          Password,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      if (response.data && response.data.message === "Login successful") {
-        alert("Login Successful");
-        navigate("/");
+      const result = await login(email, password);
+      if (result.success) {
+        navigate(from, { replace: true });
       } else {
-        alert("Login Failed: " + response.data.message);
+        setError(result.message || "Login failed");
       }
     } catch (err) {
-      console.log(err);
+      setError("An error occurred during login");
+      console.error(err);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-primary-600"></div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -84,31 +68,40 @@ const Login = () => {
       <Navbar />
       <div className="Body">
         <Base />
-        <form className="Frame">
+        <form className="Frame" onSubmit={handleLogin}>
           <div className="Form">
-            <h4>Login / SignIn</h4>
+            <h4>Login</h4>
+            {error && <div className="text-red-500 mb-4">{error}</div>}
             <div className="Inputs">
               <label>Email</label>
               <input
                 placeholder="Enter your Email"
-                value={Email}
-                onChange={EmailInputHandler}
-              ></input>
+                value={email}
+                onChange={handleEmailChange}
+                type="email"
+                required
+              />
               <label>Password</label>
               <input
                 placeholder="Enter your Password"
-                value={Password}
-                onChange={PasswordInputHandler}
-                type="Password"
-              ></input>
+                value={password}
+                onChange={handlePasswordChange}
+                type="password"
+                required
+              />
             </div>
-            <button className="LoginButtonLoginFrame" onClick={LoginCheck}>
+            <button type="submit" className="LoginButtonLoginFrame">
               Login
             </button>
             <div className="LoginFrameSpacer"></div>
             <p>
-              Create an account? <b>SignIn</b>
+              Don't have an account? <Link to="/Signup" className="font-bold text-primary-600">Sign Up</Link>
             </p>
+            {from !== "/" && (
+              <p className="mt-2 text-sm text-gray-600">
+                You'll be redirected back after login
+              </p>
+            )}
           </div>
         </form>
       </div>

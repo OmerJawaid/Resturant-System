@@ -35,19 +35,8 @@ const Home = () => {
         changeAuthenticate(false); // Set to false on error
       }
     };
-
     authenticateCheck();
   }, []);
-
-  useEffect(() => {
-    if (Authenticate === false) {
-      navigate("/Login");
-    } else if (Authenticate === true) {
-      // If authenticated, stay on the home page
-      // navigate("/") is unnecessary here unless your logic requires it
-    }
-    // No need for else navigate("/Signup"); unless required
-  }, [Authenticate, navigate]);
 
   return (
     <div className="main" style={{ backgroundColor: "#f9f9f7" }}>

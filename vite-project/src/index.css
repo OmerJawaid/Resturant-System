@@ -28,7 +28,7 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #AD343E;
 }
 
 body {
@@ -56,11 +56,32 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #AD343E;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto #AD343E;
+}
+
+/* Override default focus styles for all elements */
+*:focus {
+  outline-color: #AD343E !important;
+}
+
+/* Override default focus ring for form elements */
+input:focus, 
+textarea:focus, 
+select:focus,
+button:focus {
+  --tw-ring-color: #AD343E !important;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color) !important;
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000) !important;
+}
+
+/* Override default link hover color */
+a:hover {
+  color: #AD343E !important;
 }
 
 @media (prefers-color-scheme: light) {
@@ -69,7 +90,7 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #AD343E;
   }
   button {
     background-color: #f9f9f9;
